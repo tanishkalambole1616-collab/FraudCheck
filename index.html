@@ -1,0 +1,553 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FraudCheck - Stay Safe Online</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #07111f;
+            color: white;
+        }
+
+        header {
+            background: #0d1b2a;
+            padding: 22px;
+            text-align: center;
+            border-bottom: 2px solid #00bfff;
+        }
+
+        header h1 {
+            color: #00bfff;
+            font-size: 32px;
+        }
+
+        nav {
+            padding: 15px;
+            text-align: center;
+            background: #10243a;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 12px;
+            font-size: 15px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .hero h2 {
+            font-size: 34px;
+            margin-bottom: 15px;
+        }
+
+        .hero span {
+            color: #00bfff;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: #10243a;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 12px;
+            border: 1px solid #1d4666;
+        }
+
+        h2 {
+            color: #00bfff;
+            margin-bottom: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 13px;
+            margin: 12px 0;
+            border-radius: 6px;
+            border: none;
+            font-size: 15px;
+        }
+
+        button {
+            background: #00bfff;
+            color: #07111f;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #55d5ff;
+        }
+
+        .result {
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #9ca3af;
+        }
+    
+/* Mobile Friendly Design */
+
+@media screen and (max-width: 600px) {
+
+    header h1 {
+        font-size: 25px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    nav a {
+        margin: 4px;
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 35px 12px;
+    }
+
+    .hero h2 {
+        font-size: 25px;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 17px;
+    }
+
+    input, textarea, button {
+        font-size: 14px;
+    }
+
+    button {
+        margin-top: 5px;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🛡️ FraudCheck</h1>
+    <p>Your Digital Safety Partner</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#job">Job Checker</a>
+    <a href="#shopping">Shopping Checker</a>
+    <a href="#safety">Safety Tips</a>
+    <a href="#quiz">Cyber Quiz</a>
+    <a href="#awareness">Scam Awareness</a>
+    <a href="#password">Password Checker</a>
+    <a href="#report">Report Fraud</a>
+</nav>
+
+<section class="container">
+    <div class="card" id="dashboard">
+        <h2>📊 FraudCheck Dashboard</h2>
+
+        <div style="display:flex; gap:15px; flex-wrap:wrap;">
+            <div class="card" style="flex:1; min-width:130px;">
+                <h3>💼 Job Scans</h3>
+                <h2 id="jobCount">0</h2>
+            </div>
+
+            <div class="card" style="flex:1; min-width:130px;">
+                <h3>🛒 Shopping Scans</h3>
+                <h2 id="shopCount">0</h2>
+            </div>
+        </div>
+
+        <h3>🕘 Recent Scan History</h3>
+        <div id="scanHistory">
+            No scans yet.
+        </div>
+    </div>
+</section>
+
+<section class="hero" id="home">
+    <h2>Stay Alert. Stay Safe. <span>Stay Secure.</span></h2>
+    <p>Detect suspicious job offers and online shopping scams.</p>
+    <p>Think Before You Click!</p>
+</section>
+
+<div class="container">
+
+    <section class="card" id="job">
+        <h2>💼 Fake Job Checker</h2>
+        <p>Enter details of a job offer to check suspicious signs.</p>
+
+        <textarea id="jobText" rows="4"
+        placeholder="Paste job offer details here..."></textarea>
+
+        <button onclick="checkJob()">Check Job Offer</button>
+
+        <div class="result" id="jobResult"></div>
+    </section>
+
+    <section class="card" id="shopping">
+        <h2>🛒 Online Shopping Scam Checker</h2>
+        <p>Enter a shopping website URL to check basic warning signs.</p>
+
+        <input type="text" id="shopUrl"
+        placeholder="Enter website URL (https://example.com)">
+
+        <button onclick="checkShopping()">Check Website</button>
+
+        <div class="result" id="shopResult"></div>
+    </section>
+
+    <section class="card" id="safety">
+        <h2>🔐 Cyber Safety Tips</h2>
+        <p>✔ Never share your OTP, PIN or password.</p>
+        <p>✔ Avoid unknown links and attachments.</p>
+        <p>✔ Verify job offers before paying registration fees.</p>
+        <p>✔ Use trusted websites for online shopping.</p>
+        <p>✔ Enable two-factor authentication.</p>
+        <p>✔ Keep your devices and apps updated.</p>
+    </section>
+
+    <section class="card">
+        <h2>🚨 Report Cyber Fraud</h2>
+        <p>If you become a victim of cyber fraud in India:</p>
+        <p>Call Cyber Fraud Helpline: <b>1930</b></p>
+        <p>Website:
+            <a href="https://cybercrime.gov.in"
+            target="_blank" style="color:#00bfff;">
+            cybercrime.gov.in</a>
+        </p>
+    </section>
+
+</div>
+
+<section class="card" id="quiz">
+    <h2>🧠 Cyber Security Quiz</h2>
+    <p><b>Question 1:</b> Should you share your OTP with anyone?</p>
+
+    <button onclick="checkAnswer(1, 'wrong')">Yes</button>
+    <button onclick="checkAnswer(1, 'right')">No</button>
+
+    <p id="answer1" class="result"></p>
+
+    <hr>
+
+    <p><b>Question 2:</b> What should you do if you receive a suspicious job offer?</p>
+
+    <button onclick="checkAnswer(2, 'wrong')">Pay registration fee</button>
+    <button onclick="checkAnswer(2, 'right')">Verify the company</button>
+
+    <p id="answer2" class="result"></p>
+
+    <hr>
+
+    <p><b>Question 3:</b> What should you do after a cyber financial fraud in India?</p>
+
+    <button onclick="checkAnswer(3, 'right')">Call 1930</button>
+    <button onclick="checkAnswer(3, 'wrong')">Ignore it</button>
+
+    <p id="answer3" class="result"></p>
+</section>
+
+<section class="card" id="password">
+    <h2>🔐 Password Strength Checker</h2>
+
+    <p>Check whether your password is weak or strong.</p>
+
+    <input
+        type="password"
+        id="passwordInput"
+        placeholder="Enter a test password"
+    >
+
+    <button onclick="checkPassword()">
+        Check Password Strength
+    </button>
+
+    <div id="passwordResult" class="result"></div>
+</section>
+
+<section class="card" id="awareness">
+    <h2>🛡️ Cyber Scam Awareness Center</h2>
+
+    <h3>📱 1. Social Media Security</h3>
+    <p>• Never click suspicious social media links.</p>
+    <p>• Enable two-factor authentication.</p>
+    <p>• Do not share personal information with strangers.</p>
+
+    <hr>
+
+    <h3>💳 2. Digital Payment Security</h3>
+    <p>• Never share your UPI PIN or OTP.</p>
+    <p>• You do not need to enter your UPI PIN to receive money.</p>
+    <p>• Verify the receiver before making payments.</p>
+
+    <hr>
+
+    <h3>💻 3. Device Security</h3>
+    <p>• Keep your operating system updated.</p>
+    <p>• Use strong passwords and screen locks.</p>
+    <p>• Install apps only from trusted sources.</p>
+    <p>• Use antivirus and firewall protection.</p>
+
+    <hr>
+
+    <h3>⚖️ 4. Cyber Law in India</h3>
+    <p>Information Technology Act, 2000 provides a legal
+    framework for electronic transactions and addresses
+    various cyber offences.</p>
+
+    <hr>
+
+    <h3>🚨 5. Famous Cyber Attacks</h3>
+    <p><b>WannaCry:</b> A ransomware attack that affected
+    computers worldwide in 2017.</p>
+
+    <p><b>Pegasus:</b> Spyware associated with surveillance
+    of mobile devices.</p>
+
+    <p><b>Cosmos Bank Cyber Attack:</b> A major cyber
+    heist involving fraudulent transactions in 2018.</p>
+</section>
+
+<section class="card" id="report">
+    <h2>🚨 Report Cyber Crime</h2>
+    <p>If you face online financial fraud in India, act quickly.</p>
+
+    <h3>Cyber Fraud Helpline: 1930</h3>
+
+    <p>National Cyber Crime Reporting Portal:</p>
+
+    <a href="https://cybercrime.gov.in"
+       target="_blank" style="color:#00bfff;">
+       Visit Official Cyber Crime Portal
+    </a>
+
+    <p style="margin-top:15px;">
+       Keep transaction details and evidence ready
+       when reporting a complaint.
+    </p>
+</section>
+
+<footer>
+    <p>FraudCheck © 2026 | Cyber Security Awareness Project</p>
+</footer>
+
+<script>
+    
+function checkJob() {
+    let text = document.getElementById("jobText").value.toLowerCase();
+    let result = document.getElementById("jobResult");
+
+    if (text.trim() === "") {
+        result.innerHTML = "Please enter job offer details.";
+        return;
+    }
+
+    let warnings = [
+        "registration fee",
+        "pay first",
+        "guaranteed job",
+        "no interview",
+        "urgent payment",
+        "processing fee"
+    ];
+
+    let found = warnings.filter(word => text.includes(word));
+
+    let score = Math.min(found.length * 25, 100);
+
+    let level = "LOW";
+    if (score >= 50) {
+        level = "HIGH";
+    } else if (score >= 25) {
+        level = "MEDIUM";
+    }
+    saveScan("Shopping", score, level);
+    saveScan("Job", score, level);
+    result.innerHTML =
+        "<h3>Risk Score: " + score + "/100</h3>" +
+        "<h3>Risk Level: " + level + "</h3>" +
+        "<p>Warning signs detected: " +
+        (found.length ? found.join(", ") : "None of the listed phrases") +
+        "</p>" +
+        "<p>Note: This is an indicator-based assessment, not proof of fraud.</p>";
+}
+
+
+    
+function checkShopping() {
+    let url = document.getElementById("shopUrl").value.trim();
+    let result = document.getElementById("shopResult");
+
+    if (url === "") {
+        result.innerHTML = "Please enter a website address.";
+        return;
+    }
+
+    let score = 0;
+    let reasons = [];
+
+    if (!url.toLowerCase().startsWith("https://")) {
+        score += 30;
+        reasons.push("HTTPS security is not detected.");
+    }
+
+    if (url.includes(" ")) {
+        score += 20;
+        reasons.push("Website address contains spaces.");
+    }
+
+    if (url.toLowerCase().includes("free-gift") ||
+        url.toLowerCase().includes("prize")) {
+        score += 30;
+        reasons.push("Suspicious promotional words detected.");
+    }
+
+    score = Math.min(score, 100);
+
+    let level = "LOW";
+    if (score >= 50) {
+        level = "HIGH";
+    } else if (score >= 25) {
+        level = "MEDIUM";
+    }
+    saveScan("Shopping", score, level);
+    result.innerHTML =
+        "<h3>Risk Score: " + score + "/100</h3>" +
+        "<h3>Risk Level: " + level + "</h3>" +
+        "<p>" + (reasons.length ? reasons.join("<br>") : "No basic warning signs detected.") + "</p>" +
+        "<p>Note: This basic check does not verify website authenticity.</p>";
+}
+
+function checkAnswer(question, answer) {
+    let result = document.getElementById("answer" + question);
+
+    if (answer === "right") {
+        result.innerHTML = "✅ Correct Answer! Well done.";
+        result.style.color = "#00ff99";
+    } else {
+        result.innerHTML = "❌ Incorrect! Please try again.";
+        result.style.color = "#ff5555";
+    }
+}
+
+function saveScan(type, score, level) {
+    let scans = JSON.parse(localStorage.getItem("fraudScans") || "[]");
+
+    scans.unshift({
+        type: type,
+        score: score,
+        level: level,
+        date: new Date().toLocaleString()
+    });
+
+    scans = scans.slice(0, 10);
+
+    localStorage.setItem("fraudScans", JSON.stringify(scans));
+
+    updateDashboard();
+}
+
+function updateDashboard() {
+    let scans = JSON.parse(localStorage.getItem("fraudScans") || "[]");
+
+    let jobs = scans.filter(scan => scan.type === "Job").length;
+    let shops = scans.filter(scan => scan.type === "Shopping").length;
+
+    document.getElementById("jobCount").innerText = jobs;
+    document.getElementById("shopCount").innerText = shops;
+
+    let history = document.getElementById("scanHistory");
+
+    if (scans.length === 0) {
+        history.innerHTML = "No scans yet.";
+        return;
+    }
+
+    history.innerHTML = scans.map(scan =>
+        "<p><b>" + scan.type + "</b> — " +
+        scan.score + "/100 — " + scan.level +
+        "<br><small>" + scan.date + "</small></p><hr>"
+    ).join("");
+}
+
+updateDashboard();
+
+function checkPassword() {
+    let password = document.getElementById("passwordInput").value;
+    let result = document.getElementById("passwordResult");
+
+    if (password === "") {
+        result.innerHTML = "Please enter a test password.";
+        return;
+    }
+
+    let score = 0;
+
+    if (password.length >= 8) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[a-z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+
+    let level = "";
+
+    if (score <= 2) {
+        level = "🔴 Weak Password";
+    } else if (score <= 4) {
+        level = "🟠 Medium Password";
+    } else {
+        level = "🟢 Strong Password";
+    }
+
+    result.innerHTML =
+        "<h3>" + level + "</h3>" +
+        "<p>Strength score: " + score + "/5</p>" +
+        "<p>Use at least 8 characters, uppercase and lowercase letters, numbers and symbols.</p>" +
+        "<p>Your password is checked locally and is not saved by this feature.</p>";
+}
+
+</script>
+
+</body>
+</html>
